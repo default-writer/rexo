@@ -1175,17 +1175,18 @@ rxp_test_failure_array_extend_back(struct rx_failure **slice,
 __pragma(section("rxsuite$a", read)) __pragma(section("rxsuite$b", read))
     __pragma(section("rxsuite$c", read))
 
-        __declspec(allocate("rxsuite$a")) extern const
+        __declspec(allocate("rxsuite$a")) RXP_STORAGE const
     struct rxp_test_suite_desc *const rxp_test_suite_section_begin
     = NULL;
 
-__declspec(allocate("rxsuite$c")) extern const
+__declspec(allocate("rxsuite$c")) RXP_STORAGE const
     struct rxp_test_suite_desc *const rxp_test_suite_section_end
     = NULL;
 
 #define RXP_TEST_SUITE_REGISTER(NAME)                                          \
     __declspec(                                                                \
-        allocate("rxsuite$b")) extern const struct rxp_test_suite_desc *const  \
+        allocate(                                                       \
+        "rxsuite$b")) RXP_STORAGE const struct rxp_test_suite_desc *const  \
     RXP_TEST_SUITE_DESC_PTR_GET_ID(NAME)                                       \
         = &RXP_TEST_SUITE_DESC_GET_ID(NAME)
 
@@ -1229,17 +1230,18 @@ static const struct rxp_test_suite_desc *const rxp_dummy_suite = NULL;
 __pragma(section("rxcase$a", read)) __pragma(section("rxcase$b", read))
     __pragma(section("rxcase$c", read))
 
-        __declspec(allocate("rxcase$a")) extern const
+        __declspec(allocate("rxcase$a")) RXP_STORAGE const
     struct rxp_test_case_desc *const rxp_test_case_section_begin
     = NULL;
 
-__declspec(allocate("rxcase$c")) extern const
+__declspec(allocate("rxcase$c")) RXP_STORAGE const
     struct rxp_test_case_desc *const rxp_test_case_section_end
     = NULL;
 
 #define RXP_TEST_CASE_REGISTER(SUITE_NAME, NAME)                               \
     __declspec(                                                                \
-        allocate("rxcase$b")) extern const struct rxp_test_case_desc *const    \
+        allocate(                                                       \
+        "rxcase$b")) RXP_STORAGE const struct rxp_test_case_desc *const    \
     RXP_TEST_CASE_DESC_PTR_GET_ID(SUITE_NAME, NAME)                            \
         = &RXP_TEST_CASE_DESC_GET_ID(SUITE_NAME, NAME)
 
