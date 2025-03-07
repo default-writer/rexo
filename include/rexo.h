@@ -1179,14 +1179,13 @@ __pragma(section("rxsuite$a", read)) __pragma(section("rxsuite$b", read))
     struct rxp_test_suite_desc *const rxp_test_suite_section_begin
     = NULL;
 
-__declspec(allocate("rxsuite$c")) RXP_STORAGE const
-    struct rxp_test_suite_desc *const rxp_test_suite_section_end
+__declspec(allocate("rxsuite$c")) RXP_STORAGE const struct rxp_test_suite_desc
+    *const rxp_test_suite_section_end
     = NULL;
 
 #define RXP_TEST_SUITE_REGISTER(NAME)                                          \
-    __declspec(                                                                \
-        allocate(                                                       \
-        "rxsuite$b")) RXP_STORAGE const struct rxp_test_suite_desc *const  \
+    __declspec(allocate(                                                       \
+        "rxsuite$b")) RXP_STORAGE const struct rxp_test_suite_desc *const      \
     RXP_TEST_SUITE_DESC_PTR_GET_ID(NAME)                                       \
         = &RXP_TEST_SUITE_DESC_GET_ID(NAME)
 
@@ -1234,14 +1233,13 @@ __pragma(section("rxcase$a", read)) __pragma(section("rxcase$b", read))
     struct rxp_test_case_desc *const rxp_test_case_section_begin
     = NULL;
 
-__declspec(allocate("rxcase$c")) RXP_STORAGE const
-    struct rxp_test_case_desc *const rxp_test_case_section_end
+__declspec(allocate("rxcase$c")) RXP_STORAGE const struct rxp_test_case_desc
+    *const rxp_test_case_section_end
     = NULL;
 
 #define RXP_TEST_CASE_REGISTER(SUITE_NAME, NAME)                               \
-    __declspec(                                                                \
-        allocate(                                                       \
-        "rxcase$b")) RXP_STORAGE const struct rxp_test_case_desc *const    \
+    __declspec(allocate(                                                       \
+        "rxcase$b")) RXP_STORAGE const struct rxp_test_case_desc *const        \
     RXP_TEST_CASE_DESC_PTR_GET_ID(SUITE_NAME, NAME)                            \
         = &RXP_TEST_CASE_DESC_GET_ID(SUITE_NAME, NAME)
 
@@ -1468,10 +1466,11 @@ rxp_op_get_name(const char **name, enum rxp_op op)
         va_end(args);                                                          \
                                                                                \
         if ((STATUS) == RX_SUCCESS) {                                          \
-            (S) = (char *)RX_MALLOC(sizeof *(S)*RXP_STR_LENGTH_ID);            \
+            (S) = (char *)RX_MALLOC(sizeof *(S) * RXP_STR_LENGTH_ID);          \
             if ((S) == NULL) {                                                 \
-                RXP_LOG_DEBUG_1("failed to allocate the string (%lu bytes)\n", \
-                                (unsigned long)sizeof *(S)*RXP_STR_LENGTH_ID); \
+                RXP_LOG_DEBUG_1(                                               \
+                    "failed to allocate the string (%lu bytes)\n",             \
+                    (unsigned long)sizeof *(S) * RXP_STR_LENGTH_ID);           \
                 (STATUS) = RX_ERROR_ALLOCATION;                                \
             } else {                                                           \
                 va_start(args, FMT);                                           \
@@ -1492,10 +1491,11 @@ rxp_op_get_name(const char **name, enum rxp_op op)
         (S) = NULL;                                                            \
         (STATUS) = rxp_str_initialize ARGS;                                    \
         if ((STATUS) == RX_SUCCESS) {                                          \
-            (S) = (char *)RX_MALLOC(sizeof *(S)*RXP_STR_LENGTH_ID);            \
+            (S) = (char *)RX_MALLOC(sizeof *(S) * RXP_STR_LENGTH_ID);          \
             if ((S) == NULL) {                                                 \
-                RXP_LOG_DEBUG_1("failed to allocate the string (%lu bytes)\n", \
-                                (unsigned long)sizeof *(S)*RXP_STR_LENGTH_ID); \
+                RXP_LOG_DEBUG_1(                                               \
+                    "failed to allocate the string (%lu bytes)\n",             \
+                    (unsigned long)sizeof *(S) * RXP_STR_LENGTH_ID);           \
                 (STATUS) = RX_ERROR_ALLOCATION;                                \
             } else {                                                           \
                 (STATUS) = rxp_str_initialize ARGS;                            \
@@ -1778,10 +1778,13 @@ rxp_run_test_cases(size_t test_case_count,
 
 #ifdef RXP_DEBUG_TESTS
         fprintf(stderr,
-                "[%s%s%s] (suite: \"%s\", case: \"%s\")\n",
+                "[%s%s%s] (test \"%ld\" of \"%ld\", suite: \"%s\", case: "
+                "\"%s\")\n",
                 style_begin,
                 "EXECUTING",
                 style_end,
+                i + 1,
+                test_case_count,
                 test_case->suite_name,
                 test_case->name);
 #endif
