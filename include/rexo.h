@@ -1783,7 +1783,7 @@ rxp_run_test_cases(size_t test_case_count,
                 style_begin,
                 "EXECUTING",
                 style_end,
-                i + 1,
+                i,
                 test_case_count,
                 test_case->suite_name,
                 test_case->name);
