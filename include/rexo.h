@@ -1778,7 +1778,7 @@ rxp_run_test_cases(size_t test_case_count,
 
 #ifdef RXP_DEBUG_TESTS
         fprintf(stderr,
-                "[%s%s%s] (test \"%ld\" of \"%ld\", suite: \"%s\", case: "
+                "[%s%s%s] (test \"%zd\" of \"%zd\", suite: \"%s\", case: "
                 "\"%s\")\n",
                 style_begin,
                 "EXECUTING",
