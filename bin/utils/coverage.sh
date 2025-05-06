@@ -90,7 +90,7 @@ if [[ "${install}" == "" ]]; then
 fi
 
 if [[ "${silent}" == "--silent" ]]; then
-    exec 2>&1 >/dev/null
+    exec >/dev/null 2>&1
 fi
 
 build="${pwd}/build/coverage"

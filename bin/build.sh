@@ -15,7 +15,7 @@ fi
 
 source=$(pwd)
 
-pwd=$(cd "$(dirname $(dirname "${BASH_SOURCE[0]}"))" &> /dev/null && pwd)
+pwd=$(cd "$(dirname "$(dirname "${BASH_SOURCE[0]}")")" &> /dev/null && pwd)
 
 cd "${pwd}"
 
@@ -99,7 +99,7 @@ if [[ "${install}" == "" ]]; then
 fi
 
 if [[ "${silent}" == "--silent" ]]; then
-    exec 2>&1 >/dev/null
+    exec >/dev/null 2>&1
 fi
 
 build=( "build/build-v1" "build/build-v2" "build/build-v3" "build/build-v4" "build/build-v5" "build/build-v6" )

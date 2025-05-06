@@ -93,7 +93,7 @@ function get-targets() {
     pwd=$(get-cwd)
 
     if [[ ! -d "${pwd}/config" ]]; then
-        exec 2>&1 >/dev/null
+        exec >/dev/null 2>&1
 
         cmake=$(get-cmake)
         if [[ "${cmake}" == "" ]]; then
@@ -247,7 +247,7 @@ function get-source-targets() {
     fi
 
     if [[ ! -d "${pwd}/config" ]]; then
-        exec 2>&1 >/dev/null
+        exec >/dev/null 2>&1
 
         build="${pwd}/config"
         ${cmake} \
